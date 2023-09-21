@@ -8,8 +8,7 @@ import { Post } from "./types";
  * @returns A copy of the given array of posts without deleted posts.
  */
 export function filterOutDeletedPosts(posts: Post[]): Post[] {
-    // TODO: Implement filtering logic to exclude deleted posts
-    // Return the filtered array
+    //const results = posts.filter(post => !post.deletedAt)
 
-    return posts.filter(post => true); // FIXME
+    return posts.filter(post => !post.deletedAt);
 }
