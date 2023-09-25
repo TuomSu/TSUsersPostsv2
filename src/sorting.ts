@@ -17,6 +17,7 @@ function dateFormat(posts: Post[]){
 }
 
 function sortPostsFunction(posts: Post[]): Post[] {
+    const sortedPosts = [...posts];
     let swapped;
     do {
         swapped = false;
@@ -29,7 +30,7 @@ function sortPostsFunction(posts: Post[]): Post[] {
             }
         }
     }while (swapped);
-    return posts;
+    return sortedPosts;
     
 }
 
