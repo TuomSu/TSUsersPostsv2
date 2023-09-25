@@ -21,11 +21,11 @@ function sortPostsFunction(posts: Post[]): Post[] {
     let swapped;
     do {
         swapped = false;
-        for (let i = 0; i < posts.length -1; i++){
-            if(posts[i].publishedAt > posts[i+1].publishedAt){
-                let position= posts[i];
-                posts[i] = posts[i+1];
-                posts[i+1] = position;
+        for (let i = 0; i < sortedPosts.length -1; i++){
+            if(sortedPosts[i].publishedAt > sortedPosts[i+1].publishedAt){
+                let position= sortedPosts[i];
+                sortedPosts[i] = sortedPosts[i+1];
+                sortedPosts[i+1] = position;
                 swapped=true;
             }
         }
