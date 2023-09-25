@@ -7,12 +7,42 @@ import { Post, User } from "./types";
  * @param posts The array of post objects to be sorted.
  * @returns A new array with the posts sorted by publishedAt time.
  */
+
+function dateFormat(posts: Post[]){
+    for (let p of posts){
+        if(typeof String(p.publishedAt)){
+        new Date(p.publishedAt).getTime()/1000;}
+    }
+
+}
+
+function sortPostsFunction(posts: Post[]): Post[] {
+    let swapped;
+    do {
+        swapped = false;
+        for (let i = 0; i < posts.length -1; i++){
+            if(posts[i].publishedAt > posts[i+1].publishedAt){
+                let position= posts[i];
+                posts[i] = posts[i+1];
+                posts[i+1] = position;
+                swapped=true;
+            }
+        }
+    }while (swapped);
+    return posts;
+    
+}
+
+
 export function sortPostsByPublishedDate(posts: Post[]): Post[] {
     // TODO: Implement manual sorting logic here.
     // The existing `sort` method must not be used!
     // See https://en.wikipedia.org/wiki/Sorting_algorithm.
-    return [...posts];
+    
+    let sortedPosts: Post[] = sortPostsFunction(posts);
+    return [...sortedPosts];
 }
+
 
 /**
  * Sorts an array of user objects in ascending order based on the 'registeredAt' date.
