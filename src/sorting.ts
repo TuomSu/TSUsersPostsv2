@@ -8,12 +8,16 @@ import { Post, User } from "./types";
  * @returns A new array with the posts sorted by publishedAt time.
  */
 
-function dateFormat(posts: Post[]){
-    for (let p of posts){
-        if(typeof String(p.publishedAt)){
-        new Date(p.publishedAt).getTime()/1000;}
+function dateFormat(users: User[]){
+    const formattedUsers = [...users]
+    for (let i=0; i<formattedUsers.length; i++){
+    const user = formattedUsers[i];
+    if (typeof user.registeredAt === 'number'){
+        const formattedDate = new Date((user.registeredAt)*1000).toISOString();
+    formattedUsers[i].registeredAt = formattedDate;
     }
-
+    }
+    return formattedUsers;
 }
 
 function sortPostsFunction(posts: Post[]): Post[] {
@@ -32,6 +36,12 @@ function sortPostsFunction(posts: Post[]): Post[] {
     }while (swapped);
     return sortedPosts;
     
+}
+
+function sortUsers(users: User[]): User[]{
+    const sortedUsers = dateFormat(users);
+    sortedUsers.sort((a, b) => new Date(a.registeredAt).getTime() - new Date(b.registeredAt).getTime());
+    return(sortedUsers);
 }
 
 
@@ -57,5 +67,6 @@ export function sortUsersByRegistrationDate(users: User[]): User[] {
 
     // NOTE! The users' timestamps are presented in Unix time, which counts seconds since epoch.
     // JavaScript Dates use milliseconds instead of seconds. See https://stackoverflow.com/a/221297 for more info.
-    return [...users];
+    let sortedUsersBydate : User [] = sortUsers(users);
+    return [...sortedUsersBydate];
 }
